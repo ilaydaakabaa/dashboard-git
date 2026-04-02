@@ -11,8 +11,9 @@
 
     <div class="stats-grid">
       <StatCard title="Toplam Satış" :value="`${totalSales} ₺`" />
-      <StatCard title="Toplam Sipariş" :value="totalOrders" />
+      
       <StatCard title="En İyi Kategori" :value="bestCategory" />
+      <StatCard title="Toplam Sipariş" :value="totalOrders" />
     </div>
 
     <!-- <div class="charts-grid">
