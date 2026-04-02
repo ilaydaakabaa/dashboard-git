@@ -1,106 +1,121 @@
 export default {
-  namespaced: true,
+    namespaced: true,
 
-  state() {
-    return {
-      orders: [
-        { id: 1, customer: 'Ayşe', category: 'İçecek', amount: 120, paymentType: 'Kart', date: '2026-04-02' },
-        { id: 2, customer: 'Mehmet', category: 'Tatlı', amount: 95, paymentType: 'Nakit', date: '2026-04-02' },
-        { id: 3, customer: 'Zeynep', category: 'İçecek', amount: 150, paymentType: 'Kart', date: '2026-04-01' },
-        { id: 4, customer: 'Ali', category: 'Fast Food', amount: 210, paymentType: 'Online', date: '2026-04-01' },
-        { id: 5, customer: 'Ece', category: 'Tatlı', amount: 80, paymentType: 'Kart', date: '2026-03-31' },
-        { id: 6, customer: 'Can', category: 'Fast Food', amount: 175, paymentType: 'Nakit', date: '2026-03-31' }
-      ]
-    }
-  },
-
-  getters: {
-    orders(state) {
-      return state.orders
-    },
-
-    totalSales(state) {
-      return state.orders.reduce((sum, order) => sum + order.amount, 0)
-    },
-
-    totalOrders(state) {
-      return state.orders.length
-    },
-
-    bestCategory(state) {
-      const totals = {}
-
-      state.orders.forEach(order => {
-        if (!totals[order.category]) {
-          totals[order.category] = 0
+    state() {
+        return {
+            orders: [
+                { id: 1, customer: 'Ayşe', category: 'İçecek', amount: 120, paymentType: 'Kart', date: '2026-04-02' },
+                { id: 2, customer: 'Mehmet', category: 'Tatlı', amount: 95, paymentType: 'Nakit', date: '2026-04-02' },
+                { id: 3, customer: 'Zeynep', category: 'İçecek', amount: 150, paymentType: 'Kart', date: '2026-04-01' },
+                { id: 4, customer: 'Ali', category: 'Fast Food', amount: 210, paymentType: 'Online', date: '2026-04-01' },
+                { id: 5, customer: 'Ece', category: 'Tatlı', amount: 80, paymentType: 'Kart', date: '2026-03-31' },
+                { id: 6, customer: 'Can', category: 'Fast Food', amount: 175, paymentType: 'Nakit', date: '2026-03-31' }
+            ]
         }
-        totals[order.category] += order.amount
-      })
-
-      let best = ''
-      let max = 0
-
-      for (const category in totals) {
-        if (totals[category] > max) {
-          max = totals[category]
-          best = category
-        }
-      }
-
-      return best
     },
 
-    categorySalesChartData(state) {
-      const totals = {}
+    getters: {
+        orders(state) {
+            return state.orders
+        },
 
-      state.orders.forEach(order => {
-        if (!totals[order.category]) {
-          totals[order.category] = 0
-        }
-        totals[order.category] += order.amount
-      })
+        totalSales(state) {
+            return state.orders.reduce((sum, order) => sum + order.amount, 0)
+        },
 
-      return Object.keys(totals).map(category => ({
-        name: category,
-        value: totals[category]
-      }))
-    },
+        totalOrders(state) {
+            return state.orders.length
+        },
 
-    paymentTypeChartData(state) {
-      const totals = {}
+        bestCategory(state) {
+            const totals = {}
 
-      state.orders.forEach(order => {
-        if (!totals[order.paymentType]) {
-          totals[order.paymentType] = 0
-        }
-        totals[order.paymentType] += order.amount
-      })
+            state.orders.forEach(order => {
+                if (!totals[order.category]) {
+                    totals[order.category] = 0
+                }
+                totals[order.category] += order.amount
+            })
 
-      return Object.keys(totals).map(type => ({
-        name: type,
-        value: totals[type]
-      }))
-    },
+            let best = ''
+            let max = 0
 
-    recentOrders(state) {
-      return [...state.orders]
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 5)
-    },
-    averageAmountByCategory(state) {
-        const categoryMap = {}
-
-        state.orders.forEach(order => {
-            if (!categoryMap[order.category]) {
-                categoryMap[order.category] = { total: 0, count: 0 }
+            for (const category in totals) {
+                if (totals[category] > max) {
+                    max = totals[category]
+                    best = category
+                }
             }
-            categoryMap[order.category].total += order.amount
-            categoryMap[order.category].count++
-        })
-        return Object.keys(categoryMap).map(category => ({
-            name: category,
-            value: categoryMap[category].total / categoryMap[category].count
-        }))
+
+            return best
+        },
+
+        categorySalesChartData(state) {
+            const totals = {}
+
+            state.orders.forEach(order => {
+                if (!totals[order.category]) {
+                    totals[order.category] = 0
+                }
+                totals[order.category] += order.amount
+            })
+
+            return Object.keys(totals).map(category => ({
+                name: category,
+                value: totals[category]
+            }))
+        },
+
+        paymentTypeChartData(state) {
+            const totals = {}
+
+            state.orders.forEach(order => {
+                if (!totals[order.paymentType]) {
+                    totals[order.paymentType] = 0
+                }
+                totals[order.paymentType] += order.amount
+            })
+
+            return Object.keys(totals).map(type => ({
+                name: type,
+                value: totals[type]
+            }))
+        },
+
+        recentOrders(state) {
+            return [...state.orders]
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 5)
+        },
+        averageAmountByCategory(state) {
+            const categoryMap = {}
+
+            state.orders.forEach(order => {
+                if (!categoryMap[order.category]) {
+                    categoryMap[order.category] = { total: 0, count: 0 }
+                }
+                categoryMap[order.category].total += order.amount
+                categoryMap[order.category].count++
+            })
+            return Object.keys(categoryMap).map(category => ({
+                name: category,
+                value: categoryMap[category].total / categoryMap[category].count
+            }))
+        },
+        ordersCountByCategory(state) {
+            const counts = {}
+
+            state.orders.forEach(order => {
+                if (!counts[order.category]) {
+                    counts[order.category] = 0
+                }
+                counts[order.category] += 1
+            })
+
+            return Object.keys(counts).map(category => ({
+                name: category,
+                value: counts[category]
+            }))
+        }
     }
-  }
 }

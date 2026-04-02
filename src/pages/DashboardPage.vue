@@ -13,10 +13,35 @@
       <StatCard title="En İyi Kategori" :value="bestCategory" />
     </div>
 
-    <div class="charts-grid">
+    <!-- <div class="charts-grid">
       <SalesBarChart />
       <PaymentPieChart />
       <AverageAmountBarChart />
+    </div> -->
+        <div class="charts-grid">
+      <BarChart
+        title="Kategori Bazlı Toplam Satış"
+        :chartData="categorySalesChartData"
+        seriesName="Toplam Satış"
+        yAxisName="Satış"
+        valueSuffix=" ₺"
+      />
+
+      <BarChart
+        title="Kategoriye Göre Ortalama Tutar"
+        :chartData="averageAmountByCategory"
+        seriesName="Ortalama Tutar"
+        yAxisName="Ortalama"
+        valueSuffix=" ₺"
+      />
+
+      <BarChart
+        title="Kategoriye Göre Sipariş Sayısı"
+        :chartData="ordersCountByCategory"
+        seriesName="Sipariş Sayısı"
+        yAxisName="Adet"
+        valueSuffix=""
+      />
     </div>
 
     <RecentOrdersTable :orders="recentOrders" />
@@ -31,13 +56,26 @@ import SalesBarChart from '@/components/dashboard/SalesBarChart.vue'
 import PaymentPieChart from '@/components/dashboard/PaymentPieChart.vue'
 import AverageAmountBarChart from '@/components/dashboard/AverageAmountBarChart.vue'
 import RecentOrdersTable from '@/components/dashboard/RecentOrdersTable.vue'
-
+import BarChart from '@/components/dashboard/BarChart.vue'
 const store = useStore()
 
 const totalSales = computed(() => store.getters['sales/totalSales'])
 const totalOrders = computed(() => store.getters['sales/totalOrders'])
 const bestCategory = computed(() => store.getters['sales/bestCategory'])
 const recentOrders = computed(() => store.getters['sales/recentOrders'])
+
+
+const categorySalesChartData = computed(() => {
+  return store.getters['sales/categorySalesChartData'] || []
+})
+
+const averageAmountByCategory = computed(() => {
+  return store.getters['sales/averageAmountByCategory'] || []
+})
+
+const ordersCountByCategory = computed(() => {
+  return store.getters['sales/ordersCountByCategory'] || []
+})
 </script>
 
 <style scoped>
