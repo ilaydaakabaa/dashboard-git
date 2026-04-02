@@ -18,7 +18,7 @@
       <PaymentPieChart />
     </div>
 
-    <div class="placeholder-box table-box">Tablo alanı</div>
+    <RecentOrdersTable :orders="recentOrders" />
   </section>
 </template>
 
@@ -28,11 +28,14 @@ import { useStore } from 'vuex'
 import StatCard from '@/components/dashboard/StatCard.vue'
 import SalesBarChart from '@/components/dashboard/SalesBarChart.vue'
 import PaymentPieChart from '@/components/dashboard/PaymentPieChart.vue'
+import RecentOrdersTable from '@/components/dashboard/RecentOrdersTable.vue'
+
 const store = useStore()
 
 const totalSales = computed(() => store.getters['sales/totalSales'])
 const totalOrders = computed(() => store.getters['sales/totalOrders'])
 const bestCategory = computed(() => store.getters['sales/bestCategory'])
+const recentOrders = computed(() => store.getters['sales/recentOrders'])
 </script>
 
 <style scoped>
@@ -68,27 +71,6 @@ const bestCategory = computed(() => store.getters['sales/bestCategory'])
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   margin-bottom: 24px;
-}
-
-.placeholder-box {
-  background: white;
-  border-radius: 18px;
-  padding: 24px;
-  min-height: 120px;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #64748b;
-  font-weight: 600;
-}
-
-.large {
-  min-height: 360px;
-}
-
-.table-box {
-  min-height: 260px;
 }
 
 @media (max-width: 992px) {
