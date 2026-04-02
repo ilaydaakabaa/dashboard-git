@@ -8,9 +8,9 @@
     </div>
 
     <div class="stats-grid">
-      <div class="placeholder-box">Kart alanı</div>
-      <div class="placeholder-box">Kart alanı</div>
-      <div class="placeholder-box">Kart alanı</div>
+      <StatCard title="Toplam Satış" :value="`${totalSales} ₺`" />
+      <StatCard title="Toplam Sipariş" :value="totalOrders" />
+      <StatCard title="En İyi Kategori" :value="bestCategory" />
     </div>
 
     <div class="charts-grid">
@@ -22,11 +22,23 @@
   </section>
 </template>
 
+<script setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+import StatCard from '@/components/dashboard/StatCard.vue'
+
+const store = useStore()
+
+const totalSales = computed(() => store.getters['sales/totalSales'])
+const totalOrders = computed(() => store.getters['sales/totalOrders'])
+const bestCategory = computed(() => store.getters['sales/bestCategory'])
+</script>
+
 <style scoped>
 .dashboard-page {
   min-height: 100vh;
   padding: 24px;
-  background: #f5f7fb;
+  background: linear-gradient(to bottom, #f8fafc, #eef2ff);
 }
 
 .dashboard-header {
@@ -36,6 +48,7 @@
 .dashboard-header h1 {
   font-size: 2rem;
   margin-bottom: 8px;
+  color: #0f172a;
 }
 
 .dashboard-header p {
@@ -44,14 +57,14 @@
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin-bottom: 24px;
 }
 
 .charts-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   margin-bottom: 24px;
 }
@@ -79,7 +92,7 @@
 
 @media (max-width: 992px) {
   .stats-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .charts-grid {
