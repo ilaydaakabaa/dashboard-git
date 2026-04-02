@@ -16,6 +16,7 @@
     <div class="charts-grid">
       <SalesBarChart />
       <PaymentPieChart />
+      <AverageAmountBarChart />
     </div>
 
     <RecentOrdersTable :orders="recentOrders" />
@@ -28,6 +29,7 @@ import { useStore } from 'vuex'
 import StatCard from '@/components/dashboard/StatCard.vue'
 import SalesBarChart from '@/components/dashboard/SalesBarChart.vue'
 import PaymentPieChart from '@/components/dashboard/PaymentPieChart.vue'
+import AverageAmountBarChart from '@/components/dashboard/AverageAmountBarChart.vue'
 import RecentOrdersTable from '@/components/dashboard/RecentOrdersTable.vue'
 
 const store = useStore()
@@ -53,10 +55,12 @@ const recentOrders = computed(() => store.getters['sales/recentOrders'])
   font-size: 2rem;
   margin-bottom: 8px;
   color: #0f172a;
+  line-height: 1.2;
 }
 
 .dashboard-header p {
   color: #6b7280;
+  line-height: 1.5;
 }
 
 .stats-grid {
@@ -71,6 +75,7 @@ const recentOrders = computed(() => store.getters['sales/recentOrders'])
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   margin-bottom: 24px;
+  align-items: stretch;
 }
 
 @media (max-width: 992px) {
@@ -94,6 +99,10 @@ const recentOrders = computed(() => store.getters['sales/recentOrders'])
 
   .dashboard-header h1 {
     font-size: 1.5rem;
+  }
+
+  .dashboard-header p {
+    font-size: 0.95rem;
   }
 }
 </style>

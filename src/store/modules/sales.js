@@ -86,6 +86,21 @@ export default {
       return [...state.orders]
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .slice(0, 5)
+    },
+    averageAmountByCategory(state) {
+        const categoryMap = {}
+
+        state.orders.forEach(order => {
+            if (!categoryMap[order.category]) {
+                categoryMap[order.category] = { total: 0, count: 0 }
+            }
+            categoryMap[order.category].total += order.amount
+            categoryMap[order.category].count++
+        })
+        return Object.keys(categoryMap).map(category => ({
+            name: category,
+            value: categoryMap[category].total / categoryMap[category].count
+        }))
     }
   }
 }

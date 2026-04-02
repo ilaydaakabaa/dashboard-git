@@ -43,6 +43,8 @@ defineProps({
   border-radius: 18px;
   padding: 20px;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  width: 100%;
+  min-width: 0;
 }
 
 .table-title {
@@ -52,6 +54,7 @@ defineProps({
 }
 
 .table-wrapper {
+  width: 100%;
   overflow-x: auto;
 }
 
@@ -66,6 +69,7 @@ td {
   text-align: left;
   padding: 14px 12px;
   border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
 }
 
 th {
@@ -75,5 +79,21 @@ th {
 
 td {
   color: #0f172a;
+}
+
+@media (max-width: 576px) {
+  .table-card {
+    padding: 16px;
+  }
+
+  .table-title {
+    font-size: 1rem;
+  }
+
+  th,
+  td {
+    padding: 12px 10px;
+    font-size: 0.92rem;
+  }
 }
 </style>
