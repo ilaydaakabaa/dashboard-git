@@ -12,7 +12,7 @@ import * as echarts from 'echarts'
 const props = defineProps({
   title: {
     type: String,
-    default: 'Bar Chart'
+    default: 'Kategori Grafiği'
   },
   chartData: {
     type: Array,
