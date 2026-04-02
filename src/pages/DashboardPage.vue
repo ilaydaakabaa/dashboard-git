@@ -14,8 +14,8 @@
     </div>
 
     <div class="charts-grid">
-      <div class="placeholder-box large">Bar chart alanı</div>
-      <div class="placeholder-box large">Pie chart alanı</div>
+      <SalesBarChart />
+      <PaymentPieChart />
     </div>
 
     <div class="placeholder-box table-box">Tablo alanı</div>
@@ -26,7 +26,8 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import StatCard from '@/components/dashboard/StatCard.vue'
-
+import SalesBarChart from '@/components/dashboard/SalesBarChart.vue'
+import PaymentPieChart from '@/components/dashboard/PaymentPieChart.vue'
 const store = useStore()
 
 const totalSales = computed(() => store.getters['sales/totalSales'])
