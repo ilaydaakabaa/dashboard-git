@@ -3,7 +3,7 @@
     <div class="dashboard-header">
       <div>
 <h1>Yönetim Dashboard</h1>
-<p>Satış verilerinin genel görünümü</p>
+<p>Satış verilerinin</p>
       </div>
     </div>
 
