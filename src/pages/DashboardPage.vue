@@ -2,8 +2,10 @@
   <section class="dashboard-page">
     <div class="dashboard-header">
       <div>
-<h1>Yönetim Dashboard</h1>
-<p>Satış verilerinin</p>
+
+<h1>Satış Analiz Paneli</h1>
+<p>Vuex, Props ve ECharts pratik projesi</p>
+
       </div>
     </div>
 
